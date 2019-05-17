@@ -32,6 +32,7 @@ class Escueladeescalada extends EntidadBase{
         $this->idroc=$idroc;
     }
     
+
     public function save() {
         $query="INSERT INTO escueladescalada (ides,escuela,idroc)
                 VALUES (NULL,

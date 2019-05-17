@@ -8,7 +8,12 @@ class ModeloBase extends EntidadBase {
         parent::__construct($table, $adapter);
     }
     
+    public function ejecutarBorrarSql($query){
+        $query=$this->db()->query($query);
+    }
+    
     public function ejecutarSql($query){
+       
         $query=$this->db()->query($query);
         
         if ($query){
@@ -18,15 +23,16 @@ class ModeloBase extends EntidadBase {
                 }
             } elseif($query->num_rows==1) {
                 if ($row=$query->fetch_object()){
-                    $resultSet=$row;
+                    // Probamos a dejarlos todos como arrays para poder usarlos en las vistas sin errores
+                    $resultSet[]=$row;
                 }
             }else{
-                $resultSet=true;
+                $resultSet=0;
             }
         } else {
             $resultSet=false;
         }
-        
+       //  print_r($resulSet);
         return $resultSet;
     }
 }

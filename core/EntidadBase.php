@@ -35,7 +35,7 @@ class EntidadBase{
     public function getById($id) {
         $query=$this->db->query("SELECT * FROM $this->table WHERE id=$id");
         
-        if ($row=$query->fetch_objetc()) {
+        if ($row=$query->fetch_object()) {
             $resulSet=$row;
         }
         

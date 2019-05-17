@@ -72,12 +72,6 @@ class Producto extends EntidadBase{
         return $this->idpro;
     }
     
-    // Método sobreescrito
-    public function deleteById($idpro) {
-        $query=$this->db->query("DELETE FROM $this->table WHERE idpro=$idpro");
-        return $query;
-    }
-    
     public function save(){
         $query="INSERT INTO producto (idpro,idcatg,nombre,responsable,img_via,seguros,dificultad,descripcion)
                 VALUES (NULL,
@@ -89,7 +83,7 @@ class Producto extends EntidadBase{
                 '".$this->dificultad."',
                 '".$this->descripcion."');";
         $save=$this->db()->query($query);
-        //$this->db()->error;
+        $this->db()->error;
         return $save;
     }
 }

@@ -1,33 +1,78 @@
 <?php require 'inc/encabezado.inc'; ?>
-<form action="<?php echo $helper->url("producto", "crear"); ?>" enctype="multipart/form-data" method="post" class="col-lg-5" role="form">
-    <h3>Añadir Vía de escalada</h3>
+
+   <div class="container-fluid">
+   <div class="row">
+   <div class="col-lg-12">
+      <?php // var_dump($alldificults); ?>
+      <?php // var_dump($allproducts); ?>
+      <?php // var_dump($alltipus); ?>
+      <?php // var_dump($allescuela); ?>
+       <h4>Filtrar listado</h4>
         <hr/>
-        Seleccionar Sector: <input type="text" name="idcatg" class="form-control" required />
-        Nombre: <input type="text" name="nombre" class="form-control" required />
-        Responsable: <input type="text" name="responsable" class="form-control" required value="Desconocido" />
-        Imagen de la vía: <input type="file" name="img_via" class="form-control" required value="Sin imagen" />
-        Número de seguros: <input type="number" name="seguros" class="form-control" required />
-        Dificultad: <input type="text" name="dificultad" class="form-control" required />
-        Descripción: <input type="text" name="descripcion" class="form-control" />
-        <input type="submit" name="value" value="Añadir" class="btn btn-success" />
+   </div>
+   <div class="col-lg-4">
+        <form action=" <?php echo $helper->url("producto", "filtrarListado"); ?>" enctype="multipart/form-data" method="post" role="form">
+        <input type="hidden" name="Dificultad" value="dificultad" />
+        Filtrar por Dificultad: <select name="dificultad">
+               <option value="0"></option>
+            <?php foreach($alldificults as $dificult) {?>
+            <?php echo "<option value='".$dificult->dificultad."'>".$dificult->dificultad."</option>"; ?>
+            <?php } ?>
+        </select>
+        <input type="submit" value="Dificultad" class="btn btn-success" />
+       </form>
+       </div>
+      <div class="col-lg-4"> 
+     <form action="<?php echo $helper->url("producto","filtrarListado"); ?>" enctype="multipart/form-data" method="post" role="form">  
+       <input type="hidden" name="Tiporoca" value="tiporoca" />
+        Filtrar por Tipo de Roca: <select name="Roca">
+           <option value="0"></option>
+            <?php foreach($alltipus as $tipus) {?>
+            <?php echo "<option value=".$tipus->idro.">".$tipus->tiporoca."</option>"; ?>
+            <?php } ?>
+        </select>
+        <input type="submit" value="Roca" class="btn btn-success" />
+       </form>
+       </div>
+       <div class="col-lg-4">
+       <form action="<?php echo $helper->url("producto", "filtrarListado"); ?>" enctype="multipart/form-data" method="post" role="form">  
+       <input type="hidden" name="Escuela" value="escuela" />
+        Filtrar por Escuela de escalada: <select name="escuela">
+           <option value="0"></option>
+            <?php foreach($allescuela as $escuela) {?>
+            <?php echo "<option value=".$escuela->ides.">".$escuela->escuela."</option>"; ?>
+            <?php } ?>
+        </select>
+        <input type="submit" value="Escuela" class="btn btn-success" />
         </form>
-        
+       </div>
+        </div>
         <?php if(isset($allproducts) && count($allproducts)>=1) {?>
-        <div class="col-lg-7" style="float:right;">
-            <h3>Productos</h3>
-            <hr/>
-            </div>
-         <section class="col-lg-7 producto" style="height:400px; overflow-y:scroll;">
+        <br />
+        <h3>Vías de escalada</h3>
+            <table class="table table-cell table-striped table-responsive-md">
+               <thead>
+                   <tr>
+                       <th>Detalles</th>
+                       <th>Imagen representativa</th>
+                       <th>Nombre de la vía</th>
+                       <th>Responsable</th>
+                       <th>Número de seguros</th>
+                       <th>Dificultad</th>
+                       <th>Descripción</th>
+                   </tr>
+               </thead>
             <?php foreach($allproducts as $product) {?>
-                <?php echo "<img src=media/img/".$product->img_via." width='150' height='150'/>"; ?>
-                <?php echo $product->idcatg; ?> -
-                <?php echo $product->nombre; ?> -
-                <?php echo $product->responsable; ?> -
-                <?php echo $product->seguros; ?>
-                <?php echo $product->dificultad; ?>
-                <?php echo $product->descripcion; ?>
-                <hr/>
+                <tr><td><a href="<?php echo $helper->url("producto","detalleProducto"); ?>&id=<?php echo $product->idpro; ?>" class="btn btn-primary">Detalle</a></td>
+                <td><?php echo "<img src=media/img/".$product->img_via." width='150' height='150'/>"; ?></td>
+                <?php // echo $product->idcatg; ?> 
+                <td><?php echo $product->nombre; ?></td>
+                <td><?php echo $product->responsable; ?></td>
+                <td><?php echo $product->seguros; ?></td>
+                <td><?php echo $product->dificultad; ?></td>
+                <td><?php echo $product->descripcion; ?></td>
+                </tr>
             <?php } ?>
-            </section>
             <?php } ?>
+            </table>
 <?php require 'inc/pie.inc'; ?>

@@ -24,7 +24,7 @@ class Roca extends EntidadBase{
         $this->tiporoca=$tiporoca;
     }
     
-     public function save() {
+    public function save() {
         $query="INSERT INTO roca (idro,tiporoca)
                 VALUES (NULL,
                 '".$this->tiporoca."');";
