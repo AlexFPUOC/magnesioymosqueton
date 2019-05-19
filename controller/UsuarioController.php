@@ -25,14 +25,15 @@ class UsuarioController extends ControladorBase{
     
     public function crear(){
         if (isset($_POST["apodo"])) {
-            $usuario=new Usuario();
-            
+            $usuario=new Usuario($this->adapter);
+            $comprobando=new UsuarioModel($this->adapter);
             $idperfil=$_POST["idperfil"];
             $fech_reg=$_POST["fech_reg"];
-            $password=sha1 ($_POST["password"]);
+            $password=$_POST["password"];
             $apodo=$_POST["apodo"];
             $eliminado=$_POST["eliminado"];
-            
+            $revisar=$comprobando->comprobarUsuario($apodo);
+            if ($revisar){
             $usuario->setIdperfil($idperfil);
             $usuario->setFech_reg($fech_reg);
             $usuario->setPassword($password);
@@ -40,8 +41,14 @@ class UsuarioController extends ControladorBase{
             $usuario->setEliminado($eliminado);
             
             $save=$usuario->save();
+            } else {
+                echo "<h1>El nombre escogido ya existe, por favor escoja otro.</h1>";
+                $this->redirect("usuario","registrar");
+            }
+        } else {
+        // echo "Redirigido a crear correctamente, sin datos.";
+        $this->redirect("Producto","Verlistado");
         }
-        $this->redirect("Usuario","index");
     }
     
     public function borrar(){
@@ -54,7 +61,17 @@ class UsuarioController extends ControladorBase{
             $this->redirect();
         }
     }
-    
+    public function registrar() {
+         // Creamos nuevo usuario
+        $usuario=new Usuario($this->adapter);
+        // Usuario hereda de EntidadBase, usamos su método getAll para tomar todos los datos de la tabla producto
+        $allusers=$usuario->getAll();
+        // Llamamos al método view heredado de ControladorBase con el resulset obtenido para que haga un require_once del archivo usuarioView.php
+        $this->view("usuario", array(
+            "allusers"=>$allusers,
+            "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+        ));
+    }
     public function recuperarAdmin(){
         $usuario=new UsuarioModel;
         $usu=$usuario->getAdmin();

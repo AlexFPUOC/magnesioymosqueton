@@ -44,5 +44,14 @@ class UsuarioModel extends ModeloBase{
        $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE idusuario=$query1");
        return $query;
     }
+    
+    public function comprobarUsuario($dato) {
+        $nombre=$dato;
+        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo=$dato")){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>

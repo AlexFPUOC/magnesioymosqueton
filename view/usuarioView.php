@@ -1,23 +1,44 @@
 <?php require 'inc/encabezado.inc'; ?>
-    <body>
+        <div class="row">
+        <div class="col-lg-6">
+        <h3>Formulario de registro</h3>
+            </div>
+            <div class="col-lg-6">
+            <h3>Usuarios (Versión para pruebas.)</h3>
+            </div>
+            </div>
+            <hr/>
+        <div class="row">
+        <div class="col-lg-6">
         <form action="<?php echo $helper->url("usuario", "crear"); ?>" method="post" class="col-lg-5">
-        <h3>Añadir Usuario</h3>
-        <hr/>
         Apodo: <input type="text" name="apodo" class="form-control" required />
         Contraseña: <input type="text" name="password" class="form-control" required />
+        Confirmar contraseña: <input type="text" name="password2" class="form-control" required />
         <input type="hidden" name="idperfil" value="1" />
         <input type="hidden" name="eliminado" value="0" />
         <input type="hidden" name="fech_reg" value="<?php echo date('d-m-Y'); ?>" />
-        <input type="submit" name="value" value="Añadir" class="btn btn-success" />
+        <input type="submit" name="value" value="Registrarme" class="btn btn-success" />
+        <a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a>
         </form>
-        
-        <div class="col-lg-6 usuario" style="height:400px;overflow-y:scroll;">
-           <h3>Usuarios</h3>
-               <?php foreach($allusers as $user) {
-                    echo $user->apodo." - ".$user->password."<hr/>";
+        </div>
+        <div class="col-lg-6">
+               <table class="table table-cell table-striped table-responsive-md">
+               <thead>
+                   <tr>
+                       <th>Id usuario</th>
+                       <th>Id perfil</th>
+                       <th>Fecha registro</th>
+                       <th>Password</th>
+                       <th>Apodo</th>
+                       <th>Eliminado</th>
+                   </tr>
+               </thead>
+                   <?php foreach($allusers as $user) {
+                    echo "<tr><td>".$user->idusuario."</td><td>".$user->idperfil."</td><td>".$user->fech_reg."</td><td>".$user->password."</td><td>".$user->apodo."</td><td>".$user->eliminado."</td></tr>";
                     // echo $Hola;                  
 }
-            ?>
+                   ?></table>
             </div>
+</div>
 <?php require 'inc/pie.inc'; ?>
 

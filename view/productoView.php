@@ -1,6 +1,21 @@
 <?php require 'inc/encabezado.inc'; ?>
 
    <div class="container-fluid">
+   <?php if ((!isset($_SESSION["idUsuario"]) && empty($_SESSION["idUsuario"])) && (!isset($_SESSION["idClave"])) && (empty($_SESSION["idClave"]))) {
+    ?>
+    <div class="row"><div class="col-lg-12"></div></div>
+    <div class="row"><div class="col-lg-12"></div></div>
+   <div class="row">
+       <div class="col-lg-1 offset-lg-4">
+           <a href="<?php echo $helper->url("usuario","registrar"); ?>" class="btn btn-warning">Registro</a>
+       </div>
+       <div class="col-lg-1 offset-lg-1">
+           <a href="<?php echo $helper->url("usuario","entrar"); ?>" class="btn btn-danger">Inicio Sesión</a>
+       </div>
+       <div class="offset-lg-5"></div>
+   </div>
+   <hr />
+   <?php } ?>
    <div class="row">
    <div class="col-lg-12">
       <?php // var_dump($alldificults); ?>
@@ -8,7 +23,6 @@
       <?php // var_dump($alltipus); ?>
       <?php // var_dump($allescuela); ?>
        <h4>Filtrar listado</h4>
-        <hr/>
    </div>
    <div class="col-lg-4">
         <form action=" <?php echo $helper->url("producto", "filtrarListado"); ?>" enctype="multipart/form-data" method="post" role="form">
@@ -47,6 +61,7 @@
         </form>
        </div>
         </div>
+        <hr/>
         <?php if(isset($allproducts) && count($allproducts)>=1) {?>
         <br />
         <h3>Vías de escalada</h3>

@@ -72,5 +72,6 @@ class Usuario extends EntidadBase{
         $save=$this->db()->query($query);
         return $save;
     }
+    
 }
 ?>
