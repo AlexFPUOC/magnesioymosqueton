@@ -60,7 +60,23 @@ class Usuario extends EntidadBase{
         return $query;
     }
     
+    //Convertir la fecha date de mySQL al valor de uso en vistas
+    public function dateVista($amd) {
+    list($a,$m,$d) = explode('-', $amd);
+    return "$d-$m-$a";
+    }
+    
+    
+    //Convertir la fecha que recogemos en el formulario al formato date de mySQL
+    function dateMysql($dma) {
+    list($d,$m,$a) = explode('-', $dma);
+    return "$a-$m-$d";
+    }
+    
     public function save(){
+        $date=$this->dateMysql($this->fech_reg);
+        $this->setFech_reg($date);
+        // echo $date."=".$this->fech_reg;
         $query="INSERT INTO usuario(idusuario, idperfil, fech_reg, password, apodo, eliminado) "
             ."VALUES (NULL," 
             ."'".$this->idperfil."',"
@@ -69,6 +85,7 @@ class Usuario extends EntidadBase{
             ."'".$this->apodo."',"
             ."'".$this->eliminado."'"
             .");";
+        // echo $query;
         $save=$this->db()->query($query);
         return $save;
     }

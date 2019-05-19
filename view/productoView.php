@@ -1,7 +1,8 @@
 <?php require 'inc/encabezado.inc'; ?>
+<?php require 'config/sesion.php'; ?>
 
    <div class="container-fluid">
-   <?php if ((!isset($_SESSION["idUsuario"]) && empty($_SESSION["idUsuario"])) && (!isset($_SESSION["idClave"])) && (empty($_SESSION["idClave"]))) {
+   <?php if ((!isset($_SESSION["IdUsuario"]) && empty($_SESSION["IdUsuario"])) && (!isset($_SESSION["IdClave"])) && (empty($_SESSION["IdClave"]))) {
     ?>
     <div class="row"><div class="col-lg-12"></div></div>
     <div class="row"><div class="col-lg-12"></div></div>
@@ -10,10 +11,22 @@
            <a href="<?php echo $helper->url("usuario","registrar"); ?>" class="btn btn-warning">Registro</a>
        </div>
        <div class="col-lg-1 offset-lg-1">
-           <a href="<?php echo $helper->url("usuario","entrar"); ?>" class="btn btn-danger">Inicio Sesión</a>
+           <a href="<?php echo $helper->url("usuario","entrar"); ?>" class="btn btn-primary">Inicio Sesión</a>
        </div>
        <div class="offset-lg-5"></div>
    </div>
+   <hr />
+   <?php } else {?>
+   <?php // echo "iniciarSesion crea la variables de sesión IdUsuario = ".$_SESSION["IdUsuario"]."<br />"; ?>
+   <?php // echo "iniciarSesion crea la variables de sesión IdClave = ".$_SESSION["IdClave"]."<br />"; ?>
+   <div class="row"><div class="col-lg-12"></div></div>
+    <div class="row"><div class="col-lg-12"></div></div>
+   <div class="row">
+      <div class="col-lg-2">Usuario: <?php echo $_SESSION['IdUsuario']; ?></div>
+       <div class="col-lg-2 offset-lg-3">
+           <a href="<?php echo $helper->url("usuario","cerrar"); ?>" class="btn btn-light">Cerrar Sesión</a>
+       <div class="offset-lg-5"></div>
+       </div></div>
    <hr />
    <?php } ?>
    <div class="row">
@@ -78,7 +91,7 @@
                    </tr>
                </thead>
             <?php foreach($allproducts as $product) {?>
-                <tr><td><a href="<?php echo $helper->url("producto","detalleProducto"); ?>&id=<?php echo $product->idpro; ?>" class="btn btn-primary">Detalle</a></td>
+                <tr><td><a href="<?php echo $helper->url("producto","detalleProducto"); ?>&id=<?php echo $product->idpro; ?>" class="btn btn-dark">Detalle</a></td>
                 <td><?php echo "<img src=media/img/".$product->img_via." width='150' height='150'/>"; ?></td>
                 <?php // echo $product->idcatg; ?> 
                 <td><?php echo $product->nombre; ?></td>

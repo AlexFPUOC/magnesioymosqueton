@@ -47,11 +47,25 @@ class UsuarioModel extends ModeloBase{
     
     public function comprobarUsuario($dato) {
         $nombre=$dato;
-        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo=$dato")){
+        // echo "El dato que llega a comprobarUsuario es".$nombre;
+        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo='$dato'")){
+            // var_dump($query);
+            return true;
+        } else {
+            // var_dump($query);
+            return false;
+        }
+    }
+    
+    public function comprobarPassword($password, $usuario) {
+        $nombre=$usuario;
+        $clave=$password;
+        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo='$nombre' AND password='$clave'")) {
             return true;
         } else {
             return false;
         }
     }
+        
 }
 ?>

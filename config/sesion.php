@@ -1,5 +1,6 @@
 <?php session_start();
-if ((isset($_SESSION["idUsuario"]) && !empty($_SESSION["idUsuario"])) && (isset($_SESSION["idClave"])) && (!empty($_SESSION["idClave"]))) {
-$usuar=$_SESSION["idUsuario"];
+if ((isset($_SESSION["IdUsuario"]) && !empty($_SESSION["IdUsuario"])) && (isset($_SESSION["IdClave"])) && (!empty($_SESSION["IdClave"]))) {
+// echo $_SESSION["IdUsuario"];
+// echo $_SESSION["IdClave"];
 }
 ?>
