@@ -64,13 +64,7 @@ class Valoraciones extends EntidadBase{
         return $this->idval;
     }
     
-    // Método sobreescrito
-    public function deleteById($idval) {
-        $query=$this->db->query("DELETE FROM $this->table WHERE idval=$idval");
-        return $query;
-    }
-    
-    public function save(){
+   public function save(){
         $query="INSERT INTO valoraciones (idval,product,usuario,reportado,puntuacion,votos,comentario)
                 VALUES (NULL,
                 '".$this->product."',

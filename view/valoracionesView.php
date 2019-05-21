@@ -1,31 +1,46 @@
 <?php require 'inc/encabezado.inc'; ?>
-<form action="<?php echo $helper->url("valoraciones", "crear"); ?>" method="post" class="col-lg-5" role="form">
-    <h3>Añadir valoración</h3>
-        <hr/>
-        Puntuación: <input type="number" name="puntuacion" class="form-control" required />
-        Comentario: <input type="text" name="comentario" class="form-control" />
-        <input type="hidden" name="product" class="form-control" value="100" />
-        <input type="hidden" name="usuario" class="form-control" value="100" />
-        <input type="hidden" name="reportado" class="form-control" value="0" />
-        <input type="hidden" name="votos" class="form-control" value="1" />
-        <input type="submit" name="value" value="Añadir" class="btn btn-success" />
-        </form>
-        
-        <?php if(isset($allvalorations) && count($allvalorations)>=1) {?>
-        <div class="col-lg-7" style="float:right;">
-            <h3>Valoraciones</h3>
-            <hr/>
-            </div>
-         <section class="col-lg-7 valoraciones" style="height:400px; overflow-y:scroll;">
-            <?php foreach($allvalorations as $valoration) {?>
-                <?php echo $valoration->product; ?> -
-                <?php echo $valoration->usuario; ?> -
-                <?php echo $valoration->puntuacion; ?> -
-                <?php echo $valoration->comentario; ?> -
-                <?php echo $valoration->votos; ?> -
-                <?php echo $valoration->reportado; ?>
-                <hr/>
+<?php require 'config/sesion.php'; ?>
+<?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
+         <div class="container">
+          <div class="row">
+          <div class="col-lg-8">
+           <h3>Vías de escalada</h3>
+              </div><?php $control=false; ?>
+              <div class="col-lg-2"><a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a></div>
+              <div class="col-lg-2"><a href="<?php echo $helper->url("valoraciones","crearValoracion"); ?>" class="btn btn-primary">Añadir Valoración</a></div></div>
+              <div class="row"><div class="col-lg-12">
+            <table class="table table-cell table-striped table-responsive-md">
+               <thead>
+                   <tr>
+                       <th>Id valoración</th>
+                       <th>Id Producto</th>
+                       <th>Id Usuario</th>
+                       <th>Reportado</th>
+                       <th>Puntuación</th>
+                       <th>NºVotos</th>
+                       <th>Comentario</th>
+                   </tr>
+               </thead>
+            <?php foreach($allvaloraciones as $val) {?>
+                <tr><td><?php echo $val->idval; ?></td>
+                <td><?php echo $val->product; ?></td>
+                <td><?php echo $val->usuario; ?></td>
+                <td><?php echo $val->reportado; ?></td>
+                <?php if ($val->reportado==1) {
+                $control=true;
+                } ?>
+                <td><?php echo $val->puntuacion; ?></td>
+                <td><?php echo $val->votos; ?></td>
+                <td><?php echo $val->comentario; ?></td>
+                <td><a href="<?php echo $helper->url("valoraciones","borrar"); ?>&id=<?php echo $val->idval; ?>" class="btn btn-danger">Borrar</a></td>
+                <td><a href="<?php echo $helper->url("valoraciones","modificar"); ?>&id=<?php echo $val->idval; ?>" class="btn btn-success">Modificar</a></td>
+                </tr>
             <?php } ?>
-            </section>
+            </table></div></div>
+            <?php if ($control){ ?>
+            <div class="row"><div class="col-lg-12 alert alert-danger"> Hay valoraciones reportadas que requieren su atención.</div> </div></div>               <?php } ?>
+                                                <?php } else { ?>
+            <div class="alert alert-danger"><strong>¡Alto!</strong> Lo sentimos, permisos de acceso insuficientes.</div>
+            <a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a>
             <?php } ?>
 <?php require 'inc/pie.inc'; ?>

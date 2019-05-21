@@ -34,11 +34,11 @@ class Escueladeescalada extends EntidadBase{
     
 
     public function save() {
-        $query="INSERT INTO escueladescalada (ides,escuela,idroc)
+        $query="INSERT INTO escueladeescalada (ides,escuela,idroc)
                 VALUES (NULL,
                 '".$this->escuela."',
                 '".$this->idroc."');";
-        
+        //var_dump($query);
         $save=$this->db()->query($query);
                 //$this->db()->error;
                 return $save;

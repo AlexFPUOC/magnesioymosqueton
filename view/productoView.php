@@ -28,7 +28,26 @@
        <div class="offset-lg-5"></div>
        </div></div>
    <hr />
-   <?php } ?>
+   <?php if ($_SESSION["IdPerfil"]==4) { ?>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                <a href="<?php echo $helper->url("usuario","gestionar"); ?>" class="btn btn-primary">Gestionar Usuarios</a>
+            </div>
+            <div class="col-lg-2">
+                <a href="<?php echo $helper->url("categoria","gestionar"); ?>" class="btn btn-primary">Gestionar Categorias</a>
+            </div>
+            <div class="col-lg-2">
+                <a href="<?php echo $helper->url("producto","gestionar"); ?>" class="btn btn-primary">Gestionar Vías</a>
+            </div>
+            <div class="col-lg-2">
+                <a href="<?php echo $helper->url("valoraciones","gestionar"); ?>" class="btn btn-primary">Gestionar Valoraciones</a>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <hr />
+        <?php } ?>
+    <?php } ?>
    <div class="row">
    <div class="col-lg-12">
       <?php // var_dump($alldificults); ?>

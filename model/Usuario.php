@@ -54,11 +54,6 @@ class Usuario extends EntidadBase{
     public function setEliminado($eliminado) {
         $this->eliminado=$eliminado;
     }
-    // Método sobreescrito
-    public function deleteById($idusuario) {
-        $query=$this->db->query("DELETE FROM $this->table WHERE idusuario=$idusuario");
-        return $query;
-    }
     
     //Convertir la fecha date de mySQL al valor de uso en vistas
     public function dateVista($amd) {

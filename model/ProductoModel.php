@@ -8,8 +8,8 @@ class ProductoModel extends ModeloBase{
     }
     
     // Método sobreescrito
-    public function deleteById($idpro) {
-        $query=$this->ejecutarBorrarSql("DELETE FROM $this->table WHERE idpro=$idpro");
+    public function deleteById($idpro, $campo="idpro") {
+        $query=$this->ejecutarBorrarSql("DELETE FROM $this->table WHERE $campo=$idpro");
         return $query;
     }
     // Método para recoger los datos de un determinado producto conociendo su id
@@ -31,6 +31,18 @@ class ProductoModel extends ModeloBase{
         
        return $query;
     }
+    
+        //Método para recoger los datos del sector conociendo su id
+    public function getViaById($id){
+        $idvia=$id;
+        $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE idpro=$idvia");
+        if ($query){
+            return $query;
+        } else {
+            var_dump($query);
+        }
+    }
+    
     //Método que recoge un array o un objeto con el id de los sectores asociadas a un determinado tipo de roca y que devuelve los productos asociados.
     public function getProductosBySector($datos) {
         $idproductos=$datos;
@@ -61,6 +73,29 @@ class ProductoModel extends ModeloBase{
         }
         // echo "Consulta Producto: SELECT * FROM ".$this->table." WHERE idcatg=".$query1;
         $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE idcatg=$query1");
+        return $query;
+    }
+    public function siviaBorrable($dato){
+        $idproducto=$dato;
+        $query=$this->ejecutarBorrarSql("SELECT * FROM valoraciones WHERE product=$idproducto");
+        // var_dump($query);
+        if ($query->num_rows>0){
+            return $query;
+        } else{
+        return false;
+        }
+    }
+    
+    public function modificarProducto($idv, $ids, $nom, $res, $img, $seg, $dif, $des){
+        $idvia=$idv;
+        $idsector=$ids;
+        $nombrevia=$nom;
+        $responsable=$res;
+        $imagen=$img;
+        $seguros=$seg;
+        $dificultad=$dif;
+        $descripcion=$des;
+        $query=$this->ejecutarBorrarSql("UPDATE producto SET idpro=$idvia, idcatg=$idsector, nombre='$nombrevia', responsable='$responsable', img_via='$imagen', seguros=$seguros, dificultad='$dificultad', descripcion='$descripcion' WHERE idpro=$idvia");
         return $query;
     }
 }

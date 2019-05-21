@@ -44,6 +44,18 @@ class ProductoController extends ControladorBase{
         ));
     }
     
+   // Método para gestionar el panel de administrador referente a los productos.
+    public function gestionar() {
+        // echo "Esto aún hay que implementarlo";
+        // IMPLEMENTAR
+        $producto=new Producto($this->adapter);
+        $allproducto=$producto->getAll();
+        $this->view("producto2", array(
+            "allproducto"=>$allproducto,
+            "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+            ));
+    }
+    
    /* public function debugThings() {
         if (isset($_POST["Roca"])) {
             $tiporoca=$_POST["Tiporoca"];
@@ -129,43 +141,52 @@ class ProductoController extends ControladorBase{
     }
     
     public function crear(){
-        if (isset($_POST["nombre"])) {
-            // print_r($GLOBALS); 
-            $producto=new Producto($this->adapter);
-            
-            $idcatg=$_POST["idcatg"];
-            $nombre=$_POST["nombre"];
+        if (isset($_POST["nombrevia"])) {
+            $sector=$_POST["sector"];
+            $nombrevia=$_POST["nombrevia"];
             $responsable=$_POST["responsable"];
-            $imagen=$_POST["imagen"];
+            $imagen=$_POST["img_via"];
             $seguros=$_POST["seguros"];
             $dificultad=$_POST["dificultad"];
             $descripcion=$_POST["descripcion"];
-            
-            $producto->setIdcatg($idcatg);
-            $producto->setNombre($nombre);
+            $producto=new Producto($this->adapter);                        
+            $producto->setIdcatg($sector);
+            $producto->setNombre($nombrevia);
             $producto->setResponsable($responsable);
             $producto->setImg_via($imagen);
             $producto->setSeguros($seguros);
             $producto->setDificultad($dificultad);
             $producto->setDescripcion($descripcion);
-            
             $save=$producto->save();
+            if ($save){
+                $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La vía de escalada se ha añadido correctamente.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                    ));
+            }else {
+                $mensaje="<div class='row'><div class='col-lg-12 alert alert-danger'><strong>¡Error!</strong> La vía de escalada no se ha añadido correctamente. Inténtelo de nuevo pasados unos minutos, si la incidencia persiste contacte con el administrador.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+            }
         } else {
-            echo "Error al grabar el registro.";
+            $this->redirect("producto","verListado");
         }
-        
-        $this->redirect("Producto","index");
     }
     
-    public function borrar(){
-        if (isset($_GET["idpro"])) {
-            $idperfil=(int)$_GET["idpro"];
-            
-            $producto=new ProductoModel($this->adapter);
-            $producto->deleteById($idperfil);
-            
-            $this->redirect("Producto","index");
-        }
+        public function crearProducto(){
+            $sector= new Categoria($this->adapter);
+            $allsector=$sector->getAll();
+            $this->view("crearVia", array(
+                "allsector"=>$allsector,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+            ));
     }
     
     public function detalleProducto(){
@@ -215,6 +236,96 @@ class ProductoController extends ControladorBase{
             "allusuarios"=>$consultausuarios,
             "allperfiles"=>$consultatipoperfil
         ));
+    }
+   
+        public function modificar() {
+         if (isset($_GET["id"])) {
+            $idvia=(int)$_GET["id"];
+            // var_dump($idsector);
+            $catvia=new ProductoModel($this->adapter);
+            $viamod=$catvia->getViaById($idvia);
+            // var_dump($sectormod);
+            $this->view("productomodificar", array(
+            "allproduct"=>$viamod,
+            "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+        ));
+         }
+    }
+    public function borrar(){
+        if (isset($_GET["id"])) {
+            $idvia=(int)$_GET["id"];
+            //var_dump($idsector);
+            $comprobarvia=new ProductoModel($this->adapter);
+            $revisar=$comprobarvia->siviaBorrable($idvia);
+            //var_dump($revisar);
+            if (!$revisar) {
+                $campo="idpro";
+                $producto=new Producto($this->adapter);
+                $producto->deleteById($idvia, $campo);
+                //var_dump($categoria);
+                if ($producto){
+                    $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La vía de escalada se ha eliminado correctamente.</div></div>";
+                    $enlace="<a href='index.php?controller=producto&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                    $this->view("mensaje", array(
+                    "mensaje"=>$mensaje,
+                    "enlace"=>$enlace,
+                    "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                    ));
+                } else {
+                    $mensaje="<div class='row'><div class='col-lg-12 alert alert-danger'><strong>Error</strong> No ha sido posible efectuar la operación de borrado.</div></div>";
+                    $enlace="<a href='index.php?controller=producto&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                    $this->view("mensaje", array(
+                    "mensaje"=>$mensaje,
+                    "enlace"=>$enlace,
+                    "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                    ));
+                }
+            } else {
+                $mensaje="<div class='row'><div class='col-lg-12 alert alert-warning'><strong>Error</strong> Esta vía de escalada tiene asociadas valoraciones. No puede borrarse.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+            }
+            
+            
+        }
+    }
+    
+    public function modificarvia(){
+        if (isset ($_POST["nombrevia"])) {
+            $idvia=$_POST["idvia"];
+            $idsector=$_POST["idsector"];
+            $nombrevia=$_POST["nombrevia"];
+            $responsable=$_POST["responsable"];
+            $imagen=$_POST["img_via"];
+            $seguros=$_POST["seguros"];
+            $dificultad=$_POST["dificultad"];
+            $descripcion=$_POST["descripcion"];
+            $viamod=new ProductoModel($this->adapter);
+            $revisar=$viamod->modificarProducto($idvia, $idsector, $nombrevia, $responsable, $imagen, $seguros, $dificultad, $descripcion);
+            if ($revisar){
+                $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La vía de escalada se ha actualizado correctamente.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=modificar&id=$idvia' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+            } else {
+                $mensaje="<div class='row'><div class='col-lg-12 alert alert-danger'><strong>Error</strong> La vía de escalada no ha podido actualizarse. Inténtelo de nuevo en unos minutos y si persiste la incidencia avise al administrador.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=modificar&id=$idvia' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+            }
+        } else {
+            $this->redirect();
+        }
     }
 }
 ?>

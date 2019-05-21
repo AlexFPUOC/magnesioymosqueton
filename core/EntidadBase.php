@@ -53,8 +53,8 @@ class EntidadBase{
     }
     
     // Este método está sobreescrito en las entidades cuyo campo id tiene un nombre diferente.
-    public function deleteById($id) {
-        $query=$this->db->query("DELETE FROM $this->table WHERE id=$id");
+    public function deleteById($id, $campo) {
+        $query=$this->db->query("DELETE FROM $this->table WHERE $campo=$id");
         return $query;
     }
     

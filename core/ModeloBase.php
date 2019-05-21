@@ -7,9 +7,14 @@ class ModeloBase extends EntidadBase {
         $this->table = (string) $table;
         parent::__construct($table, $adapter);
     }
-    
+    //Método para borrar y también para hacer update.
     public function ejecutarBorrarSql($query){
         $query=$this->db()->query($query);
+        if ($query){
+            return $query;
+        }else {
+            return false;
+        }
     }
     
     public function ejecutarSql($query){

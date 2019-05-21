@@ -1,33 +1,43 @@
 <?php require 'inc/encabezado.inc'; ?>
-<form action="<?php echo $helper->url("producto","crear"); ?>" enctype="multipart/form-data" method="post">
-            <h3>Añadir producto</h3>
-            <hr/>
-            Selecciona Sector: <input type="text" name="idcatg" class="form-control"/>
-            Nombre: <input type="text" name="nombre" class="form-control"/>
-            Responsable: <input type="text" name="responsable" class="form-control"/>
-            Imagen: <input type="file" name="imagen" class="form-control"/>
-            Seguros: <input type="text" name="seguros" class="form-control"/>
-            Dificultad: <input type="text" name="dificultad" class="form-control"/>
-            Descripción: <input type="text" name="descripcion" class="form-control"/>
-            <input type="submit" value="enviar" class="btn btn-success"/>
-        </form>
-            <h3>Usuarios</h3>
-            <hr/>
-        <section class="col-lg-7 usuario" style="height:400px;overflow-y:scroll;">
-            <?php foreach($allproducts as $producto) { //recorremos el array de objetos y obtenemos el valor de las propiedades ?>
-                <?php echo $producto->idcatg; ?> -
-                <?php echo $producto->nombre; ?> -
-                <?php echo $producto->responsable; ?> -
-                <?php echo "<img src=media/img/".$producto->img_via." width='150' height='150'/>"; ?>
-                <?php echo $producto->seguros; ?> -
-                   <?php echo $producto->dificultad; ?> -
-                   <?php echo $producto->descripcion; ?> 
-                    <a href="<?php echo $helper->url("producto","borrar"); ?>&idpro=<?php echo $producto->idpro; ?>" class="btn btn-danger">Borrar</a>
-                <hr/>
+<?php require 'config/sesion.php'; ?>
+<?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
+         <div class="container">
+          <div class="row">
+          <div class="col-lg-8">
+           <h3>Vías de escalada</h3>
+              </div>
+              <div class="col-lg-2"><a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a></div>
+              <div class="col-lg-2"><a href="<?php echo $helper->url("producto","crearProducto"); ?>" class="btn btn-primary">Añadir Vía</a></div></div>
+              <div class="row"><div class="col-lg-12">
+            <table class="table table-cell table-striped table-responsive-md">
+               <thead>
+                   <tr>
+                       <th>Id vía de escalada</th>
+                       <th>Id Sector</th>
+                       <th>Nombre vía</th>
+                       <th>Responsable</th>
+                       <th>Imagen</th>
+                       <th>NºSeguros</th>
+                       <th>Dificultad</th>
+                       <th>Descripción</th>
+                   </tr>
+               </thead>
+            <?php foreach($allproducto as $producto) {?>
+                <tr><td><?php echo $producto->idpro; ?></td>
+                <td><?php echo $producto->idcatg; ?></td>
+                <td><?php echo $producto->nombre; ?></td>
+                <td><?php echo $producto->responsable; ?></td>
+                <td><?php echo "<a href='media/img/".$producto->img_via."' target='_blank'><img src=media/img/".$producto->img_via." width='75' height='75' class='img-fluid img-thumbnail' /></a>"; ?></td>
+                <td><?php echo $producto->seguros; ?></td>
+                <td><?php echo $producto->dificultad; ?></td>
+                <td><?php echo $producto->descripcion; ?></td>
+                <td><a href="<?php echo $helper->url("producto","borrar"); ?>&id=<?php echo $producto->idpro; ?>" class="btn btn-danger">Borrar</a></td>
+                <td><a href="<?php echo $helper->url("producto","modificar"); ?>&id=<?php echo $producto->idpro; ?>" class="btn btn-success">Modificar</a></td>
+                </tr>
             <?php } ?>
-        </section>
-        <footer class="col-lg-12">
-            <hr/>
-           Ejemplo PHP MySQLi POO MVC - Víctor Robles - <a href="http://victorroblesweb.es">victorroblesweb.es</a> - Copyright &copy; <?php echo  date("Y"); ?>
-        </footer>
+            </table></div></div>
+                                                <?php } else { ?>
+            <div class="alert alert-danger"><strong>¡Alto!</strong> Lo sentimos, permisos de acceso insuficientes.</div>
+            <a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a>
+            <?php } ?>
 <?php require 'inc/pie.inc'; ?>

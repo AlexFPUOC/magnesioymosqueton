@@ -4,24 +4,26 @@
          <div class="container">
           <div class="row">
           <div class="col-lg-8">
-           <h3>Tipos de roca</h3>
+           <h3>Sectores</h3>
               </div>
               <div class="col-lg-4"><a href="<?php echo $helper->url("categoria","gestionar"); ?>" class="btn btn-secondary">Volver</a></div></div>
               <div class="row"><div class="col-lg-12">
             <table class="table table-cell table-striped table-responsive-md">
                <thead>
                    <tr>
-                       <th>Id Roca</th>
-                       <th>Tipo de Roca</th>
+                       <th>Id sector</th>
+                       <th>Nombre sector</th>
+                       <th>Id escuela</th>
                        <th>Eliminar</th>
                        <th>Modificar</th>
                    </tr>
                </thead>
-            <?php foreach($allroca as $roca) {?>
-                <tr><td><?php echo $roca->idro; ?></td>
-                <td><?php echo $roca->tiporoca; ?></td>
-                <td><a href="<?php echo $helper->url("roca","borrar"); ?>&id=<?php echo $roca->idro; ?>" class="btn btn-danger">Borrar</a></td>
-                <td><a href="<?php echo $helper->url("roca","modificar"); ?>&id=<?php echo $roca->idro; ?>" class="btn btn-success">Modificar</a></td>
+            <?php foreach($allcategoria as $categoria) {?>
+                <tr><td><?php echo $categoria->idsector; ?></td>
+                <td><?php echo $categoria->sector; ?></td>
+                <td><?php echo $categoria->idesc; ?></td>
+                <td><a href="<?php echo $helper->url("categoria","borrar"); ?>&id=<?php echo $categoria->idsector; ?>" class="btn btn-danger">Borrar</a></td>
+                <td><a href="<?php echo $helper->url("categoria","modificar"); ?>&id=<?php echo $categoria->idsector; ?>" class="btn btn-success">Modificar</a></td>
                 </tr>
             <?php } ?>
             </table></div></div>
