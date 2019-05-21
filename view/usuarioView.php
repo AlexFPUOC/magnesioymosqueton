@@ -15,7 +15,7 @@
         <div class="col-lg-6">
         <form action="<?php echo $helper->url("usuario", "crear"); ?>" method="post">
         Apodo: <input type="text" name="apodo" class="form-control" required />
-        Contraseña: <input type="text" name="password" class="form-control" required />
+        Contraseña: <input type="password" name="password" class="form-control" required />
         Confirmar contraseña: <input type="text" name="password2" class="form-control" required />
         <input type="hidden" name="idperfil" value="1" />
         <input type="hidden" name="eliminado" value="0" />

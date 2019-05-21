@@ -4,7 +4,7 @@
          <div class="container">
           <div class="row">
           <div class="col-lg-8">
-           <h3>Vías de escalada</h3>
+           <h3>Valoraciones</h3>
               </div><?php $control=false; ?>
               <div class="col-lg-2"><a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a></div>
               <div class="col-lg-2"><a href="<?php echo $helper->url("valoraciones","crearValoracion"); ?>" class="btn btn-primary">Añadir Valoración</a></div></div>

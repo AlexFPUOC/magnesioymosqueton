@@ -1,12 +1,10 @@
-<?php require 'inc/encabezado.inc'; ?>
 <?php require 'config/sesion.php'; ?>
+<?php require 'inc/encabezado.inc'; ?>
 
    <div class="container-fluid">
    <?php if ((!isset($_SESSION["IdUsuario"]) && empty($_SESSION["IdUsuario"])) && (!isset($_SESSION["IdClave"])) && (empty($_SESSION["IdClave"]))) {
     ?>
-    <div class="row"><div class="col-lg-12"></div></div>
-    <div class="row"><div class="col-lg-12"></div></div>
-   <div class="row">
+  <div class="row mt-3">
        <div class="col-lg-1 offset-lg-4">
            <a href="<?php echo $helper->url("usuario","registrar"); ?>" class="btn btn-warning">Registro</a>
        </div>
@@ -19,14 +17,14 @@
    <?php } else {?>
    <?php // echo "iniciarSesion crea la variables de sesión IdUsuario = ".$_SESSION["IdUsuario"]."<br />"; ?>
    <?php // echo "iniciarSesion crea la variables de sesión IdClave = ".$_SESSION["IdClave"]."<br />"; ?>
-   <div class="row"><div class="col-lg-12"></div></div>
-    <div class="row"><div class="col-lg-12"></div></div>
-   <div class="row">
+  <div class="row mt-3">
       <div class="col-lg-2">Usuario: <?php echo $_SESSION['IdUsuario']; ?></div>
        <div class="col-lg-2 offset-lg-3">
-           <a href="<?php echo $helper->url("usuario","cerrar"); ?>" class="btn btn-light">Cerrar Sesión</a>
-       <div class="offset-lg-5"></div>
-       </div></div>
+           <a href="<?php echo $helper->url("usuario","cerrar"); ?>" class="btn btn-light">Cerrar Sesión</a></div>
+       <div class="col-lg-2 offset-lg-3">
+           <a href="<?php echo $helper->url("usuario","eliminar"); ?>&id=<?php echo $_SESSION["IdId"]; ?>&apodo=<?php echo $_SESSION["IdUsuario"] ?>&perfil=<?php echo $_SESSION["IdPerfil"]; ?>" class="btn btn-danger">Eliminar cuenta</a>
+       </div>
+       </div>
    <hr />
    <?php if ($_SESSION["IdPerfil"]==4) { ?>
         <div class="row">
@@ -121,5 +119,5 @@
                 </tr>
             <?php } ?>
             <?php } ?>
-            </table>
+       </table></div>
 <?php require 'inc/pie.inc'; ?>

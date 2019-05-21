@@ -60,7 +60,16 @@ class Usuario extends EntidadBase{
     list($a,$m,$d) = explode('-', $amd);
     return "$d-$m-$a";
     }
-    
+    //Método para recoger los datos ordenados
+        public function getAllOrder() {
+        $query=$this->db->query("SELECT * FROM $this->table ORDER BY idusuario");
+        
+        while($row = $query->fetch_object()){
+            $resulSet[]=$row;
+        }
+        
+        return $resulSet;
+    }
     
     //Convertir la fecha que recogemos en el formulario al formato date de mySQL
     function dateMysql($dma) {

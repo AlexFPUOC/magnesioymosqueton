@@ -1,5 +1,5 @@
-<?php require 'inc/encabezado.inc'; ?>
 <?php require 'config/sesion.php'; ?>
+<?php require 'inc/encabezado.inc'; ?>
 <?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
 <div class="container">
     <div class="row">

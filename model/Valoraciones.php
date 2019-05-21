@@ -63,7 +63,16 @@ class Valoraciones extends EntidadBase{
     public function getIdval(){
         return $this->idval;
     }
-    
+    //Método para recoger los datos ordenados
+    public function getAllOrder() {
+        $query=$this->db->query("SELECT * FROM $this->table ORDER BY usuario");
+        
+        while($row = $query->fetch_object()){
+            $resulSet[]=$row;
+        }
+        
+        return $resulSet;
+    }
    public function save(){
         $query="INSERT INTO valoraciones (idval,product,usuario,reportado,puntuacion,votos,comentario)
                 VALUES (NULL,

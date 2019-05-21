@@ -1,3 +1,4 @@
+
 <?php //Clase para gestionar el intercambio de valores entre la vista y el modelo en la tabla usuario.
 
 class UsuarioController extends ControladorBase{
@@ -300,7 +301,33 @@ class UsuarioController extends ControladorBase{
         ));
     }
     
-    
+    public function eliminar () {
+        if (isset($_GET["id"])) {
+            $idusuario=$_GET["id"];
+            $apodo=$_GET["apodo"];
+            $perfil=$_GET["perfil"];
+        }
+        $delusuario=new UsuarioModel($this->adapter);
+        $revisar=$delusuario->eliminarUsuario($idusuario, $apodo, $perfil);
+        if ($revisar){
+            require 'config/logout.php'; 
+            $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La cuenta ha sido eliminada correctamente.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=verListado' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+        } else {
+            $mensaje="<div class='row'><div class='col-lg-12 alert alert-warning'><strong>Error</strong> El usuario no ha podido eliminarse, inténtelo de nuevo más tarde, si persiste el error contacte con el administrador.</div></div>";
+                $enlace="<a href='index.php?controller=producto&action=verListado' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+        }
+    }
     public function iniciarSesion() {
         if (isset($_POST["apodo"])) {
             $apodo=$_POST["apodo"];
@@ -319,7 +346,7 @@ class UsuarioController extends ControladorBase{
                 }
                 $this->redirect("producto","verListado"); 
             } else {
-                $alertas="<div class='alert alert-warning'><strong>¡Alerta!</strong> El usuario o la contraseña no son correctos.</div>";
+                $alertas="<div class='alert alert-warning'><strong>¡Alerta!</strong> El usuario o la contraseña no son correctos, o el usuario ha sido eliminado.</div>";
                 $this->view("usuario2", array(
                 "Hola" => "Prueba de salida de la vista.",
                 "alertas" => $alertas

@@ -14,7 +14,7 @@ class ValoracionesModel extends ModeloBase{
             $query1 = $datoproducto->idpro;
         }
         }
-        $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE product=$idproducto");
+        $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE product=$idproducto ORDER BY usuario" );
         return $query;
     }
     // Método que comprueba que no existe ya una valoración con esa combinación de producto y usuario.

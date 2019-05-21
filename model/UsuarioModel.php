@@ -12,7 +12,77 @@ class UsuarioModel extends ModeloBase{
         $usuario=$this->ejecutarSQL($query);
         return $usuario;
     }
+// Método que compara dos fechas, las resta y devuelve los días
+    private function compararFechas($fecharegistro, $fechaactual) {
+        $valoractual = explode ("-", $fechaactual);   
+        list($a,$m,$d) = explode('-', $fecharegistro);
+        $valorregistro[0]= $d;
+        $valorregistro[1]= $m;
+        $valorregistro[2]= $a;
+        $diaactual    = $valoractual[0];  
+        $mesactual  = $valoractual[1];  
+        $yearactual   = $valoractual[2]; 
+        $diaregistro   = $valorregistro[0];  
+        $mesregistro = $valorregistro[1];  
+        $yearregistro  = $valorregistro[2];
+        $diasfechaactual = gregoriantojd($mesactual, $diaactual, $yearactual);  
+        $diasfecharegistro = gregoriantojd($mesregistro, $diaregistro, $yearregistro);     
+        if(!checkdate($mesactual, $diaactual, $yearactual)){
+            // "La fecha ".$fechaactual." no es v&aacute;lida";
+            return 0;
+        }elseif(!checkdate($mesregistro, $diaregistro, $yearregistro)){
+            // "La fecha ".$fecharegistro." no es v&aacute;lida";
+        return 0;
+        }else{
+            return  $diasfechaactual - $diasfecharegistro;
+        } 
+
+    }
     
+    //Método que comprueba, al introducir una valoración, si el usuario reúne los requisitos para promocionar
+    public function siCambiaPerfil($id) {
+        $idusuario=$id;
+        $query=$this->ejecutarSql("SELECT * FROM valoraciones WHERE usuario=$idusuario");
+        $valoracionesdelusuario=0;
+        foreach ($query as $prueba){
+            $valoracionesdelusuario++;
+        }
+        if ($valoracionesdelusuario>=VALEXPERTO){
+            if ($valoracionesdelusuario>=VALPROFESIONAL){
+                // Comprobamos fecha para profesional
+                $user=$this->getUsuarioById($idusuario);
+                foreach ($user as $usu){
+                    $fechausuario=$usu->fech_reg;
+                }
+                $fech_actual=date('d-m-Y');
+                $dias=compararFechas($fechausuario,$fech_actual);
+                if ($dias>=TIMEPROFESIONAL) {
+                    $perfil=(int)VOTOSPROFESIONAL;
+                    $promocionar=$this->ejecutarBorrarSql("UPDATE usuario SET idperfil=$perfil WHERE idusuario=$idusuario");
+                    if ($promocionar){
+                        return true;
+                    }
+                }
+            } else {
+                // Comprobamos fecha para experto
+                $user=$this->getUsuarioById($idusuario);
+                foreach ($user as $usu){
+                    $fechausuario=$usu->fech_reg;
+                }
+                $fech_actual=date('d-m-Y');
+                $dias=compararFechas($fechausuario,$fech_actual);
+                if ($dias>=TIMEEXPERTO) {
+                    $perfil=(int)VOTOSEXPERTO;
+                    $promocionar=$this->ejecutarBorrarSql("UPDATE usuario SET idperfil=$perfil WHERE idusuario=$idusuario");
+                    if ($promocionar){
+                        return true;
+                    }
+                }
+            }
+        } else {
+            return false;
+        }
+    }
     
             //Método para recoger los datos del usuario conociendo su id
     public function getUsuarioById($id){
@@ -53,10 +123,10 @@ class UsuarioModel extends ModeloBase{
         }
         }
        // echo "Consulta Usuarios: SELECT * FROM ".$this->table." WHERE idusuario= ".$query1;
-       $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE idusuario=$query1");
+       $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE idusuario=$query1 ORDER BY idusuario");
        return $query;
     }
-    
+    // Método que previene que pueda borrarse al usuario administrador o a un usuario que haya emitido valoraciones.
         public function siusuarioBorrable($dato){
         $iduser=$dato;
         $admin=4;
@@ -74,6 +144,25 @@ class UsuarioModel extends ModeloBase{
         }
     }
     
+    public function eliminarUsuario($id, $nombre, $per){
+        $iduser=$id;
+        $apodo=$nombre." [Eliminado]";
+        // echo $apodo;
+        $eliminado=1;
+        $perfil=$per;
+        if ($perfil<>4){
+        $query=$this->ejecutarBorrarSql("UPDATE $this->table SET eliminado=$eliminado, apodo='$apodo' WHERE idusuario=$iduser");
+            // echo "UPDATE $this->table SET eliminado=$eliminado, apodo=$apodo WHERE idusuario=$iduser";
+            } else {
+            $query=false;
+        }
+        if ($query){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // Método que comprueba que el apodo introducido no existe ya en la base de datos, previene errores de dobles registros.
     public function comprobarUsuario($dato) {
         $nombre=$dato;
         // echo "El dato que llega a comprobarUsuario es".$nombre;
@@ -89,7 +178,8 @@ class UsuarioModel extends ModeloBase{
     public function comprobarPassword($password, $usuario) {
         $nombre=$usuario;
         $clave=$password;
-        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo='$nombre' AND password='$clave'")) {
+        $eliminado=0;
+        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo='$nombre' AND password='$clave' AND eliminado=0")) {
             return $query;
         } else {
             return false;

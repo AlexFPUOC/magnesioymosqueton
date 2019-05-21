@@ -11,19 +11,28 @@ class TipoperfilModel extends ModeloBase{
         $usuarios=$datos;
         $contador=0;
         if (is_array($usuarios)){
+             $query= array();
         foreach ($usuarios as $thing => $datousuario){
-            if ($contador==0){
-            $query1 = $datousuario->idperfil;
+            $id = $datousuario->idperfil;
+            switch($id) {
+                case 1:
+                    $query[]="novel";
+                    break;
+                case 2:
+                    $query[]="experto";
+                    break;
+                case 3:
+                    $query[]="profesional";
+                    break;
+                case 4:
+                    $query[]="administrador";
+                    break;
+                default:
+                    $query[]="error";
+                    break;
             }
-            if ($contador>0){
-                $query1=$query1." OR idper= ".$datousuario->idperfil;
-            }
-            
-            $contador++;
-            $query2=$this->ejecutarSql("SELECT * FROM $this->table WHERE idper=$query1");
-            $query[]=$query2;
         }
-            // echo $contador." ".$query1;
+       /*     // echo $contador." ".$query1;
         } else {
             // var_dump($idvaloraciones);
         foreach ($usuarios as $thing => $datousuario){
@@ -40,9 +49,9 @@ class TipoperfilModel extends ModeloBase{
         }
        // echo "Consulta Perfiles: SELECT * FROM ".$this->table." WHERE idper= ".$query1;
        // $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE idper=$query1");
-       //var_dump($query);
+       //var_dump($query);*/
         return $query;
     }
 }
-
+}
 ?>

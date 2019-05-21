@@ -1,5 +1,5 @@
-<?php require 'inc/encabezado.inc'; ?>
 <?php require 'config/sesion.php'; ?>
+<?php require 'inc/encabezado.inc'; ?>
 <div class="container-fluid">
    <div class="row">
        <div class="col-lg-4">
@@ -82,17 +82,23 @@
                    <?php $idvalor[]=$valoraciones->idval; ?>  
                    <?php $reportado[]=$valoraciones->reportado; ?>
                <?php } ?>
-               <?php $puntuaciontotal=$puntuacionparcial/$votostotal; 
+               <?php $puntuaciontotal=$puntuacionparcial/$votostotal;
+                    $puntuaciontotal=round( $puntuaciontotal, 1, PHP_ROUND_HALF_UP);
                     echo "<div class='alert alert-primary'>La puntuación total de la vía es de: <strong>".$puntuaciontotal."</strong></div></div></div>"; ?>
                     <?php if(isset($allperfiles) && count($allperfiles)>=1 && ($allperfiles<>0)) {?>
+                    <?php //var_dump($allperfiles); ?>
                <?php foreach($allperfiles as $perfiles) {?>
-                  <?php foreach($perfiles as $tipoperfil) {?>
                    <?php // echo $tipoperfil->perfil; ?>
-                   <?php $perfil[]=$tipoperfil->perfil; ?>
+                   <?php $perfil[]=$perfiles; ?>
                <?php } ?>
-               <?php } ?>
-           <?php } ?>
-           <?php if(isset($allusuarios) && count($allusuarios)>=1 && ($allusuarios<>0)) {?>
+           <?php } else {
+                        // var_dump($allperfiles);
+                        foreach ($allperfiles as $per){
+                           // echo $per;
+                        $perfil[]=$per;
+                        }
+                    }?>
+           <?php if(isset($allusuarios) && ($allusuarios<>0)) {?>
                <?php foreach($allusuarios as $usuarios) {?>
                    <?php // echo $usuarios->apodo; ?>
                    <?php $usuariostotal[]=$usuarios->apodo; ?>

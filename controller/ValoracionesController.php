@@ -157,13 +157,26 @@ class ValoracionesController extends ControladorBase{
                 $valoraciones->setComentario($comentario);
                 $save=$valoraciones->save();
                 if ($save) {
-                    $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Exito!</strong>La valoración se ha grabado correctamente</div></div>";
-                    $enlace="<a href='index.php?controller=producto&action=detalleProducto&id=".$product."' class='btn btn-secondary'>Volver</a>";
-                    $this->view("mensaje", array(
-                    "mensaje"=>$mensaje,
-                    "enlace"=>$enlace,
-                    "Hola" => "Prueba de salida de la vista en modo MVC con POO"
-                    ));
+                    //Si la valoración se graba correctamente comprobamos si el usuario cambia o no su perfil.
+                    $comprobarusuario=new UsuarioModel($this->adapter);
+                    $sicambiaperf=$comprobarusuario->siCambiaPerfil($usuario);
+                    if ($sicambiaperf) {
+                        $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Exito!</strong>La valoración se ha grabado correctamente. <strong>¡Enhorabuena</strong> Ha promocionado al siguiente nivel de usuario.</div></div>";
+                        $enlace="<a href='index.php?controller=producto&action=detalleProducto&id=".$product."' class='btn btn-secondary'>Volver</a>";
+                        $this->view("mensaje", array(
+                        "mensaje"=>$mensaje,
+                        "enlace"=>$enlace,
+                        "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                        ));
+                    } else {
+                        $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Exito!</strong>La valoración se ha grabado correctamente</div></div>";
+                        $enlace="<a href='index.php?controller=producto&action=detalleProducto&id=".$product."' class='btn btn-secondary'>Volver</a>";
+                        $this->view("mensaje", array(
+                        "mensaje"=>$mensaje,
+                        "enlace"=>$enlace,
+                        "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                        ));
+                    }
                 } else {
                     $mensaje="<div class='row><div class='col-lg-12 alert alert-danger'><strong>¡Error!</strong>La valoración <strong>NO</strong> se ha grabado correctamente, inténtelo de nuevo en unos minutos y si el error persiste contacte con el administrador.</div></div>";
                     $enlace="<a href='index.php?controller=producto&action=detalleProducto&id=".$product."' class='btn btn-secondary'>Volver</a>";
