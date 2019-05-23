@@ -115,7 +115,9 @@
                        <th>Perfil</th>
                        <th>Puntuación</th>
                        <th>Comentario</th>
+                       <?php if ($sesionabierta) {?>
                        <th>Revisión</th>
+                       <?php } ?>
                    </tr>
                </thead>
                <?php $contador=0;
@@ -125,11 +127,13 @@
                    <td><?php echo $perfil[$contador]; ?></td>
                    <td><?php echo $puntuacion[$contador]; ?></td>
                    <td><?php echo $comentario[$contador]; ?></td>
+                   <?php if ($sesionabierta) {?>
                    <td><?php if ($reportado[$contador]==0){ ?>
                    <a href="<?php echo $helper->url("valoraciones","reportar"); ?>&idva=<?php echo $idvalor[$contador]; ?>&prod=<?php echo $idvia; ?>" class="btn btn-secondary">Reportar</a>
                    <?php } else {?>
                        <div class="alert alert-warning">Reportada</div>
                     <?php }?></td>
+                    <?php } ?>
                </tr>
                    <?php $contador++; ?>
                     <?php } ?>
