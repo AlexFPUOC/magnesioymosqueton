@@ -95,29 +95,34 @@
         <?php if(isset($allproducts) && count($allproducts)>=1) {?>
         <br />
         <h3>Vías de escalada</h3>
-            <table class="table table-cell table-striped table-responsive-md">
-               <thead>
-                   <tr>
-                       <th>Detalles</th>
-                       <th>Imagen representativa</th>
-                       <th>Nombre de la vía</th>
-                       <th>Responsable</th>
-                       <th>Número de seguros</th>
-                       <th>Dificultad</th>
-                       <th>Descripción</th>
-                   </tr>
-               </thead>
+           <hr />
             <?php foreach($allproducts as $product) {?>
-                <tr><td><a href="<?php echo $helper->url("producto","detalleProducto"); ?>&id=<?php echo $product->idpro; ?>" class="btn btn-dark">Detalle</a></td>
-                <td><?php echo "<img src=media/img/".$product->img_via." width='150' height='150'/>"; ?></td>
+              <div class="row align-items-center">
+               <div class="col-lg-1">
+                    <a href="<?php echo $helper->url("producto","detalleProducto"); ?>&id=<?php echo $product->idpro; ?>" class="btn btn-dark">Detalle</a>
+               </div>
+               <div class="col-lg-2">
+                    <?php echo "<img src=media/img/".$product->img_via." width='150' height='150'/>"; ?>
+               </div>    
+               <div class="col-lg-2">
+                      <b>Nombre de la vía: </b><?php echo $product->nombre; ?>
+               </div>
+               <div class="col-lg-2">
+                      <b>Responsable: </b><?php echo $product->responsable; ?>
+               </div>
+               <div class="col-lg-1">
+                      <b>Nº seguros: </b><?php echo $product->seguros; ?>
+               </div>    
+               <div class="col-lg-1">
+                      <b>Dificultad: </b><?php echo $product->dificultad; ?>
+               </div>
+               <div class="col-lg-3">
+                  <b>Descripción: </b><?php echo $product->descripcion; ?>
+               </div>
+            </div>
+               <hr />
                 <?php // echo $product->idcatg; ?> 
-                <td><?php echo $product->nombre; ?></td>
-                <td><?php echo $product->responsable; ?></td>
-                <td><?php echo $product->seguros; ?></td>
-                <td><?php echo $product->dificultad; ?></td>
-                <td><?php echo $product->descripcion; ?></td>
-                </tr>
             <?php } ?>
             <?php } ?>
-       </table></div>
+</div>
 <?php require 'inc/pie.inc'; ?>
