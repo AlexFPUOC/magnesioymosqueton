@@ -56,7 +56,7 @@ class EscueladeescaladaController extends ControladorBase{
                 $save=$escuela->save();
                 if ($save){
                     $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La escuela se ha añadido correctamente.</div></div>";
-                    $enlace="<a href='index.php?controller=escueladeescalada&action=gestionarescuelas' class='btn btn-secondary'>Volver</a>";
+                    $enlace="<a href='index.php?controller=escueladeescalada&action=gestionarescuela' class='btn btn-secondary'>Volver</a>";
                     $this->view("mensaje", array(
                     "mensaje"=>$mensaje,
                     "enlace"=>$enlace,
@@ -64,7 +64,7 @@ class EscueladeescaladaController extends ControladorBase{
                         ));
                 }else {
                     $mensaje="<div class='row'><div class='col-lg-12 alert alert-danger'><strong>¡Error!</strong> La escuela no se ha añadido correctamente. Inténtelo de nuevo pasados unos minutos, si la incidencia persiste contacte con el administrador.</div></div>";
-                    $enlace="<a href='index.php?controller=escueladeescalada&action=crearescuela' class='btn btn-secondary'>Volver</a>";
+                    $enlace="<a href='index.php?controller=escueladeescalada&action=crearEscuela' class='btn btn-secondary'>Volver</a>";
                     $this->view("mensaje", array(
                     "mensaje"=>$mensaje,
                     "enlace"=>$enlace,
@@ -73,7 +73,7 @@ class EscueladeescaladaController extends ControladorBase{
                 }
             } else {
                 $mensaje="<div class='row'><div class='col-lg-12 alert alert-danger'><strong>¡Error!</strong> Esta escuela ya existe y no se puede duplicar.</div></div>";
-                $enlace="<a href='index.php?controller=escueladeescalada&action=crearescuela' class='btn btn-secondary'>Volver</a>";
+                $enlace="<a href='index.php?controller=escueladeescalada&action=crearEscuela' class='btn btn-secondary'>Volver</a>";
                 $this->view("mensaje", array(
                 "mensaje"=>$mensaje,
                 "enlace"=>$enlace,
