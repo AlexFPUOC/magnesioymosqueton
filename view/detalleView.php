@@ -105,47 +105,46 @@
                <?php } ?>
            <?php } ?>
                </div></div>
-               <div class="row">
-               <div class="col-lg-12">
-           <h3>Valoraciones</h3>
-            <table class="table table-cell table-striped table-responsive-md">
-               <thead>
-                   <tr>
-                       <th>Usuario</th>
-                       <th>Perfil</th>
-                       <th>Puntuación</th>
-                       <th>Comentario</th>
-                       <?php if ($sesionabierta) {?>
-                       <th>Revisión</th>
-                       <?php } ?>
-                   </tr>
-               </thead>
+               <h3 class="ml-4">Valoraciones</h3>
+               <hr />
                <?php $contador=0;
                     foreach($allvaloraciones as $valoraciones) {?>
-               <tr>
-                   <td><?php echo $usuariostotal[$contador]; ?></td>
-                   <td><?php echo $perfil[$contador]; ?></td>
-                   <td><?php echo $puntuacion[$contador]; ?></td>
-                   <td><?php echo $comentario[$contador]; ?></td>
-                   <?php if ($sesionabierta) {?>
-                   <td><?php if ($reportado[$contador]==0){ ?>
-                   <a href="<?php echo $helper->url("valoraciones","reportar"); ?>&idva=<?php echo $idvalor[$contador]; ?>&prod=<?php echo $idvia; ?>" class="btn btn-secondary">Reportar</a>
+        <div class="row ml-2">
+            <div class="col-lg-2">
+                <b>Usuario: </b><?php echo $usuariostotal[$contador]; ?>
+            </div>
+            <div class="col-lg-2">
+                <b>Perfil: </b><?php echo $perfil[$contador]; ?>
+            </div>
+            <div class="col-lg-3">
+                <b>Puntuación: </b><?php echo $puntuacion[$contador]; ?>
+            </div>           
+            <div class="col-lg-3">
+                <b>Comentario: </b><?php echo $comentario[$contador]; ?>
+            </div>           
+            <?php if ($sesionabierta) {?>
+            <div class="col-lg-2">
+                <?php if ($reportado[$contador]==0){ ?>
+                <a href="<?php echo $helper->url("valoraciones","reportar"); ?>&idva=<?php echo $idvalor[$contador]; ?>&prod=<?php echo $idvia; ?>" class="btn btn-secondary">Reportar</a></div>
                    <?php } else {?>
-                       <div class="alert alert-warning">Reportada</div>
-                    <?php }?></td>
-                    <?php } ?>
-               </tr>
+                       <div class="alert alert-warning">Reportada</div></div>
+                       <?php }?>
+            
+                <?php } else { ?>
+               <div class="col-lg-2"></div></div>
+                 <?php } ?>
                    <?php $contador++; ?>
-                    <?php } ?>
-                    </table>
-                    </div></div>          
+                      </div>
+                      <hr />
+                       <?php } ?>
+                       
            <?php } else {
                 echo "<h3>Esta vía aún no ha recibido ninguna valoración.</h3></div></div>";
             } ?>
            <div class="row"><div class="col-lg-12">
-           <a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a>
+           <a href="<?php echo $helper->url("producto","verListado"); ?>" class="ml-4 btn btn-secondary">Volver</a>
            <?php if ($valorado==false && $sesionabierta==true){
-                echo "<h3>Emitir valoración</h3>";
+                echo "<hr /><h3>Emitir valoración</h3>";
                 echo "</div></div><div class='row'><div class='col-lg-12'>"; ?>
                 <form action="<?php echo $helper->url("valoraciones", "crear"); ?>" method="post">
                 <input type="hidden" name="product" value="<?php echo $idvia ?>" />
