@@ -1,7 +1,7 @@
 <?php require 'config/sesion.php'; ?>
 <?php require 'inc/encabezado.inc'; ?>
 <?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
-<div class="container">
+<div class="container text-light">
           <div class="row">
               <div class="offset-lg-3 col-lg-6">
                   <h3>Panel de administrador de Categorías</h3>

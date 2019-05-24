@@ -1,18 +1,17 @@
 <?php require 'inc/encabezado.inc'; ?>
 <?php require 'config/sesion.php'; ?>
 <?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
-         <div class="container">
+         <div class="container text-light">
           <div class="row">
           <div class="col-lg-8">
            <h3>Valoraciones</h3>
               </div><?php $control=false; ?>
               <div class="col-lg-2"><a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-secondary">Volver</a></div>
               <div class="col-lg-2"><a href="<?php echo $helper->url("valoraciones","crearValoracion"); ?>" class="btn btn-primary">Añadir Valoración</a></div></div>
-              <div class="row"><div class="col-lg-12">
-            <table class="table table-cell table-striped table-responsive-md">
-               <thead>
+              <table class="table table-cell table-striped table-responsive-md">
+                  <thead>
                    <tr>
-                       <th>Id valoración</th>
+                    <th>Id valoración</th>
                        <th>Id Producto</th>
                        <th>Id Usuario</th>
                        <th>Reportado</th>

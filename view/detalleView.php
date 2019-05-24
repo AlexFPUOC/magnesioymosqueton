@@ -3,8 +3,8 @@
 <div class="container-fluid">
    <div class="row">
        <div class="col-lg-4">
-           <h4>Imagen vía (Representativa)</h4></div></div>
-         <div class="row">
+           <h4 class="text-light">Imagen vía (Representativa)</h4></div></div>
+         <div class="row text-light">
          <div class="col-lg-3">
           <?php // var_dump($alldetails); ?>
           <?php // Variable que comprueba si el usuario activo ya ha emitido una valoración de esta vía.
@@ -45,7 +45,7 @@
                    <?php echo "<b>Tipo de roca:</b> ".$datoroca->tiporoca."</div></div>"; ?>
                <?php } ?>
            <?php } ?>
-           <div class="row">
+           <div class="row text-light">
            <div class="col-lg-3">
            <?php echo "<b>Nombre via: </b>".$nombrevia."</div>"; ?>
            <div class="col-lg-3">
@@ -105,11 +105,11 @@
                <?php } ?>
            <?php } ?>
                </div></div>
-               <h3 class="ml-4">Valoraciones</h3>
+               <h3 class=" text-light ml-4">Valoraciones</h3>
                <hr />
                <?php $contador=0;
                     foreach($allvaloraciones as $valoraciones) {?>
-        <div class="row ml-2">
+        <div class="row ml-2 text-light">
             <div class="col-lg-2">
                 <b>Usuario: </b><?php echo $usuariostotal[$contador]; ?>
             </div>
@@ -139,9 +139,9 @@
                        <?php } ?>
                        
            <?php } else {
-                echo "<h3>Esta vía aún no ha recibido ninguna valoración.</h3></div></div>";
+                echo "<h3 class='text-light'>Esta vía aún no ha recibido ninguna valoración.</h3></div></div>";
             } ?>
-           <div class="row"><div class="col-lg-12">
+           <div class="row text-light"><div class="col-lg-12">
            <a href="<?php echo $helper->url("producto","verListado"); ?>" class="ml-4 btn btn-secondary">Volver</a>
            <?php if ($valorado==false && $sesionabierta==true){
                 echo "<hr /><h3>Emitir valoración</h3>";

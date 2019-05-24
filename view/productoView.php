@@ -18,7 +18,7 @@
    <?php // echo "iniciarSesion crea la variables de sesión IdUsuario = ".$_SESSION["IdUsuario"]."<br />"; ?>
    <?php // echo "iniciarSesion crea la variables de sesión IdClave = ".$_SESSION["IdClave"]."<br />"; ?>
   <div class="row mt-3">
-      <div class="col-lg-2">Usuario: <?php echo $_SESSION['IdUsuario']; ?></div>
+      <div class="col-lg-2 text-light">Usuario: <?php echo $_SESSION['IdUsuario']; ?></div>
        <div class="col-lg-2 offset-lg-3">
            <a href="<?php echo $helper->url("usuario","cerrar"); ?>" class="btn btn-light">Cerrar Sesión</a></div>
        <div class="col-lg-2 offset-lg-3">
@@ -46,7 +46,7 @@
         <hr />
         <?php } ?>
     <?php } ?>
-   <div class="row">
+   <div class="row text-light">
    <div class="col-lg-12">
       <?php // var_dump($alldificults); ?>
       <?php // var_dump($allproducts); ?>
@@ -91,10 +91,9 @@
         </form>
        </div>
         </div>
-        <hr/>
         <?php if(isset($allproducts) && count($allproducts)>=1) {?>
         <br />
-        <h3>Vías de escalada</h3>
+        <h3 class="text-light text-center">Vías de escalada</h3>
            <hr />
             <?php foreach($allproducts as $product) {?>
               <div class="row align-items-center">
@@ -102,22 +101,22 @@
                     <a href="<?php echo $helper->url("producto","detalleProducto"); ?>&id=<?php echo $product->idpro; ?>" class="btn btn-dark">Detalle</a>
                </div>
                <div class="col-lg-2">
-                    <?php echo "<img src=media/img/".$product->img_via." width='150' height='150'/>"; ?>
+                    <?php echo "<img src=media/img/".$product->img_via." width='150' height='150' class='img-thumbnail' />"; ?>
                </div>    
                <div class="col-lg-2">
-                      <b>Nombre de la vía: </b><?php echo $product->nombre; ?>
+                      <strong class="text-light">Nombre de la vía: </strong><p class="text-light text-center"><?php echo $product->nombre; ?></p>
                </div>
                <div class="col-lg-2">
-                      <b>Responsable: </b><?php echo $product->responsable; ?>
+                   <strong class="text-light">Responsable: </strong><p class="text-light text-center"><?php echo $product->responsable; ?></p>
                </div>
-               <div class="col-lg-1">
-                      <b>Nº seguros: </b><?php echo $product->seguros; ?>
+               <div class="col-lg-1 text-light">
+                      <strong>Nº seguros: </strong><p class="text-center"><?php echo $product->seguros; ?></p>
                </div>    
-               <div class="col-lg-1">
-                      <b>Dificultad: </b><?php echo $product->dificultad; ?>
+               <div class="col-lg-1 text-light">
+                      <strong>Dificultad: </strong><p class="text-center"><?php echo $product->dificultad; ?></p>
                </div>
-               <div class="col-lg-3">
-                  <b>Descripción: </b><?php echo $product->descripcion; ?>
+               <div class="col-lg-3 text-light">
+                  <strong>Descripción: </strong><p class="text-center"><?php echo $product->descripcion; ?></p>
                </div>
             </div>
                <hr />

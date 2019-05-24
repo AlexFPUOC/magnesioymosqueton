@@ -11,6 +11,12 @@ class ProductoController extends ControladorBase{
         $this->adapter=$this->conectar->conexion();
     }
     
+    public function portada() {
+        $this->view("portada", array(
+            "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+        ));
+        
+    }
     public function index() {
         // Creamos nuevo producto
         $producto=new Producto($this->adapter);

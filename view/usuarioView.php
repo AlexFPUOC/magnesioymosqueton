@@ -1,5 +1,5 @@
 <?php require 'inc/encabezado.inc'; ?>
-        <div class="row">
+        <div class="row text-light">
         <div class="col-lg-6">
         <h3>Formulario de registro</h3>
            <?php if (isset($alertas)) {
@@ -11,12 +11,12 @@
             </div>
             </div>
             <hr/>
-        <div class="row">
+        <div class="row text-light">
         <div class="col-lg-6">
         <form action="<?php echo $helper->url("usuario", "crear"); ?>" method="post">
         Apodo: <input type="text" name="apodo" class="form-control" required />
-        Contraseña: <input type="password" name="password" class="form-control" required />
-        Confirmar contraseña: <input type="text" name="password2" class="form-control" required />
+        Contraseña: <input type="password" name="pass" class="form-control" required />
+        Confirmar contraseña: <input type="password" name="pass" class="form-control" required />
         <input type="hidden" name="idperfil" value="1" />
         <input type="hidden" name="eliminado" value="0" />
         <input type="hidden" name="fech_reg" value="<?php echo date('d-m-Y'); ?>" />

@@ -1,5 +1,4 @@
-
-<?php //Clase para gestionar el intercambio de valores entre la vista y el modelo en la tabla usuario.
+<?php require 'config/sesion.php'; //Clase para gestionar el intercambio de valores entre la vista y el modelo en la tabla usuario.
 
 class UsuarioController extends ControladorBase{
     public $conectar;
@@ -96,8 +95,8 @@ class UsuarioController extends ControladorBase{
             if (isset($_POST["apodo"])) {
             $idperfil=$_POST["idperfil"];
             $fech_reg=$_POST["fech_reg"];
-            $password=$_POST["password"];
-            $password2=$_POST["password2"];
+            $password=$_POST["pass"];
+            $password2=$_POST["pass2"];
             $apodo=$_POST["apodo"];
                 // echo "APODO ENVIADO A comprobarUsuario = ".$apodo;
             $eliminado=$_POST["eliminado"];
@@ -331,12 +330,14 @@ class UsuarioController extends ControladorBase{
     public function iniciarSesion() {
         if (isset($_POST["apodo"])) {
             $apodo=$_POST["apodo"];
-            $password=$_POST["password"];
+            $password=$_POST["pass"];
             $check=new UsuarioModel($this->adapter);
             $revisar=$check->comprobarPassword($password,$apodo);
+            // var_dump($revisar);
             if ($revisar) {
-                session_start();
+                // require 'config/sesion.php';
                 foreach ($revisar as $su){
+                    // var_dump($su->apodo);
                 $_SESSION["IdUsuario"]=$su->apodo;
                 $_SESSION["IdClave"]=$su->password;
                 $_SESSION["IdPerfil"]=$su->idperfil;
@@ -344,7 +345,11 @@ class UsuarioController extends ControladorBase{
                 $_SESSION["IdId"]=$su->idusuario;
                 $_SESSION["IdEliminado"]=$su->eliminado;
                 }
-                $this->redirect("producto","verListado"); 
+                // echo $_SESSION["IdUsuario"];
+                // echo $_SESSION["IdClave"];
+                // echo "apodo = ".$apodo." contraseña = ".$password;
+                // var_dump($revisar);
+            $this->redirect("producto","verListado"); 
             } else {
                 $alertas="<div class='alert alert-warning'><strong>¡Alerta!</strong> El usuario o la contraseña no son correctos, o el usuario ha sido eliminado.</div>";
                 $this->view("usuario2", array(

@@ -1,6 +1,6 @@
 <?php // Constantes de controladores y acciones por defecto
 define ('CONTROLADOR_DEFECTO', 'producto');
-define ('ACCION_DEFECTO', 'verListado');
+define ('ACCION_DEFECTO', 'portada');
 define ('VALEXPERTO', '26');
 define ('VALPROFESIONAL', '50');
 define ('TIMEEXPERTO', '180');//6 meses en días

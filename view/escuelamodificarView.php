@@ -1,7 +1,7 @@
 <?php require 'config/sesion.php'; ?>
 <?php require 'inc/encabezado.inc'; ?>
 <?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
-<div class="container">
+<div class="container text-light">
     <div class="row mt-5">
         <div class="col-lg-12">
            <?php foreach($allescuela as $escuela) {?>

@@ -179,10 +179,11 @@ class UsuarioModel extends ModeloBase{
         $nombre=$usuario;
         $clave=$password;
         $eliminado=0;
-        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo='$nombre' AND password='$clave' AND eliminado=0")) {
+        if ($query=$this->ejecutarSql("SELECT * FROM $this->table WHERE apodo='$nombre' AND password='$clave' AND eliminado=$eliminado")) {
             return $query;
         } else {
             return false;
+            // echo "SELECT * FROM $this->table WHERE apodo='$nombre' AND password='$clave' AND eliminado=$eliminado";
         }
     }
     public function modificarUsuario($idu, $idp, $fec, $pas, $apo, $eli){
