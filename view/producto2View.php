@@ -31,10 +31,10 @@
                 <td><?php echo $producto->seguros; ?></td>
                 <td><?php echo $producto->dificultad; ?></td>
                 <td><?php echo $producto->descripcion; ?></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarProducto">
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarProducto<?php echo $producto->idpro ?>">
                     Borrar
                     </button>
-                     <div class="modal text-danger" id="borrarProducto">
+                     <div class="modal text-danger" id="borrarProducto<?php echo $producto->idpro ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">

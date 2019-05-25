@@ -36,10 +36,10 @@
                 <td><?php echo $usuario->password; ?></td>
                 <td><?php echo $usuario->apodo; ?></td>
                 <td><?php echo $usuario->eliminado; ?></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarUsuario">
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarUsuario<?php echo $usuario->idusuario; ?>">
                     Borrar
                     </button>
-                     <div class="modal text-danger" id="borrarUsuario">
+                     <div class="modal text-danger" id="borrarUsuario<?php echo $usuario->idusuario; ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">

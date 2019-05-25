@@ -151,10 +151,17 @@ class ProductoController extends ControladorBase{
             $sector=$_POST["sector"];
             $nombrevia=$_POST["nombrevia"];
             $responsable=$_POST["responsable"];
-            $imagen=$_POST["img_via"];
+            $imagen=$_FILES['img_via']['name'];
             $seguros=$_POST["seguros"];
             $dificultad=$_POST["dificultad"];
             $descripcion=$_POST["descripcion"];
+            $target_path = "media/img/";
+            $target_path = $target_path . basename( $_FILES['img_via']['name']);
+            if(move_uploaded_file($_FILES['img_via']['tmp_name'], $target_path)) {
+                $fichero=true;
+            } else {
+                $fichero=false;
+            }
             $producto=new Producto($this->adapter);                        
             $producto->setIdcatg($sector);
             $producto->setNombre($nombrevia);
@@ -165,7 +172,12 @@ class ProductoController extends ControladorBase{
             $producto->setDescripcion($descripcion);
             $save=$producto->save();
             if ($save){
-                $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La vía de escalada se ha añadido correctamente.</div></div>";
+                $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La vía de escalada se ha añadido correctamente.";
+                if ($fichero) {
+                    $mensaje=$mensaje."</div></div>";
+                    } else {
+                    $mensaje=$mensaje." El archivo de imagen NO ha podido subirse al servidor.";
+                }
                 $enlace="<a href='index.php?controller=producto&action=gestionar' class='btn btn-secondary'>Volver</a>";
                 $this->view("mensaje", array(
                 "mensaje"=>$mensaje,
@@ -259,11 +271,12 @@ class ProductoController extends ControladorBase{
     }
     public function borrar(){
         if (isset($_GET["id"])) {
+            // var_dump($_GET["id"]);
             $idvia=(int)$_GET["id"];
-            //var_dump($idsector);
+            // var_dump($idvia);
             $comprobarvia=new ProductoModel($this->adapter);
             $revisar=$comprobarvia->siviaBorrable($idvia);
-            //var_dump($revisar);
+            // var_dump($revisar);
             if (!$revisar) {
                 $campo="idpro";
                 $producto=new Producto($this->adapter);

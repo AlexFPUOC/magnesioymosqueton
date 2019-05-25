@@ -26,10 +26,10 @@
                 <td><?php echo $val->usuario; ?></td>
                 <td><?php echo $val->reportado; ?> 
                    <?php if ($val->reportado==1) { ?>
-                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#resolverReporte">
+                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#resolverReporte<?php echo $val->idval; ?>">
                     Visto
                     </button>
-                     <div class="modal text-secondary" id="resolverReporte">
+                     <div class="modal text-secondary" id="resolverReporte<?php echo $val->idval; ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">

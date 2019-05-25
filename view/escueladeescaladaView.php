@@ -22,10 +22,10 @@
                 <tr><td><?php echo $escuela->ides; ?></td>
                 <td><?php echo $escuela->escuela; ?></td>
                 <td><?php echo $escuela->idroc; ?></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarEscuela">
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarEscuela<?php echo $escuela->ides; ?>">
                     Borrar
                     </button>
-                     <div class="modal text-danger" id="borrarEscuela">
+                     <div class="modal text-danger" id="borrarEscuela<?php echo $escuela->ides; ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">

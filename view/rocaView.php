@@ -20,10 +20,10 @@
             <?php foreach($allroca as $roca) {?>
                 <tr><td><?php echo $roca->idro; ?></td>
                 <td><?php echo $roca->tiporoca; ?></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarRoca">
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarRoca<?php echo $roca->idro; ?>">
                     Borrar
                     </button>
-                     <div class="modal text-danger" id="borrarRoca">
+                     <div class="modal text-danger" id="borrarRoca<?php echo $roca->idro; ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">

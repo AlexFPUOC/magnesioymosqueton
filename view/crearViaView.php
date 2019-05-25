@@ -4,7 +4,7 @@
 <div class="container text-light">
     <div class="row">
         <div class="col-lg-12">
-            <form action="<?php echo $helper->url("producto", "crear"); ?>" method="post">
+            <form action="<?php echo $helper->url("producto", "crear"); ?>" method="post" enctype="multipart/form-data">
             Sector: <select name="sector">
             <?php foreach($allsector as $sector) {?>
             <?php echo "<option value='".$sector->idsector."'>".$sector->sector."</option>"; ?>
@@ -12,7 +12,7 @@
                 </select><br />
             Nombre Vía: <input type="text" name="nombrevia" class="form-control" required />
             Responsable: <input type="text" name="responsable" class="form-control" required />
-            Imagen: <input type="text" name="img_via" class="form-control" required />
+            Seleccione imagen: <input type="file" name="img_via" class="form-control" required />
             Nº Seguros: <input type="number" name="seguros" class="form-control" required />
             Dificultad: <input type="text" name="dificultad" class="form-control" required />
             Descripción: <input type="text" name="descripcion" class="form-control" />

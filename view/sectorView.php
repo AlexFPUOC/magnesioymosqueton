@@ -22,10 +22,10 @@
                 <tr><td><?php echo $categoria->idsector; ?></td>
                 <td><?php echo $categoria->sector; ?></td>
                 <td><?php echo $categoria->idesc; ?></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarSector">
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarSector<?php echo $categoria->idsector; ?>">
                     Borrar
                     </button>
-                     <div class="modal text-danger" id="borrarSector">
+                     <div class="modal text-danger" id="borrarSector<?php echo $categoria->idsector; ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
