@@ -53,10 +53,10 @@
                 <td><?php echo $val->puntuacion; ?></td>
                 <td><?php echo $val->votos; ?></td>
                 <td><?php echo $val->comentario; ?></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarValoracion">
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarValoracion<?php echo $val->idval; ?>">
                     Borrar
                     </button>
-                     <div class="modal text-danger" id="borrarValoracion">
+                     <div class="modal text-danger" id="borrarValoracion<?php echo $val->idval; ?>">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
