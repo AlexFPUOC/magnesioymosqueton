@@ -56,7 +56,7 @@
            <?php echo "<b>Número de seguros: </b>".$segurosvia."</div></div>"; ?>
            <div class="row">
                <div class="col-lg-12">
-           <?php if(isset($allvaloraciones) && count($allvaloraciones)>=1 && ($allvaloraciones<>0)) {
+           <?php if(isset($allvaloraciones) && ($allvaloraciones<>0)) {
               $puntuaciontotal=0;
               $puntuacionparcial=0;
               $votostotal=0;
