@@ -13,4 +13,4 @@
      <link rel="stylesheet" href="config/estilos.css">
     
     </head>
-    <body>
+    <body><div class="container"><img src='media/img/logomym.jpg' alt='logo magnesio y mosquetón' class='img-fluid mb-4' /></div>

@@ -8,21 +8,21 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="media/img/carousel01.jpg" class="d-block w-100" alt="Magnesio para no resbalar las manos.">
+        <img src="media/img/carousel01.jpg" class="d-block w-100 img-fluid" alt="Magnesio para no resbalar las manos.">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="text-white bg-dark">Magnesio</h5>
           <p class="text-white bg-dark">Para no resbalar en las vías más difíciles. <a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-light">Empezar</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="media/img/carousel02.jpg" class="d-block w-100" alt="Mosquetón para la seguridad.">
+        <img src="media/img/carousel02.jpg" class="d-block w-100 img-fluid" alt="Mosquetón para la seguridad.">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="text-white bg-dark">Mosquetón</h5>
           <p class="text-white bg-dark">Porque nuestra seguridad es primordial. <a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-dark">Empezar</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="media/img/carousel03.jpg" class="d-block w-100" alt="Para llegar a lo más alto.">
+        <img src="media/img/carousel03.jpg" class="d-block w-100 img-fluid" alt="Para llegar a lo más alto.">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="text-white bg-dark">Magnesio y Mosquetón</h5>
           <p class="text-white bg-dark">Tu web de valoración de vías de escalada para llegar a lo más alto.<a href="<?php echo $helper->url("producto","verListado"); ?>" class="btn btn-primary">Empezar</a></p>
