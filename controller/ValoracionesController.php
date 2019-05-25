@@ -11,6 +11,30 @@ class ValoracionesController extends ControladorBase{
         $this->adapter=$this->conectar->conexion();
     }
     
+    public function revisar() {
+        if (isset($_GET["id"])) {
+            $idval=(int)$_GET["id"];
+            $revisaval=new ValoracionesModel($this->adapter);
+            $modrevisaval=$revisaval->revisarValoracion($idval);
+                    If ($modrevisaval) {
+            $mensaje="<div class='row'><div class='col-lg-12 alert alert-success'><strong>¡Éxito!</strong> La valoración ha sido revisada correctamente.</div>  </div>";
+            $enlace="<a href='index.php?controller=valoraciones&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+        } else {
+            $mensaje="<div class='row'><div class='col-lg-12 alert alert-danger'><strong>¡Error!</strong> La valoración no se ha podido revisar correctamente.</div>  </div>";
+            $enlace="<a href='index.php?controller=valoraciones&action=gestionar' class='btn btn-secondary'>Volver</a>";
+                $this->view("mensaje", array(
+                "mensaje"=>$mensaje,
+                "enlace"=>$enlace,
+                "Hola" => "Prueba de salida de la vista en modo MVC con POO"
+                ));
+        }
+        }
+    }
     public function index() {
         // Creamos nueva valoración
         $valoraciones=new Valoraciones($this->adapter);

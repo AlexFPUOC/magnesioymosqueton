@@ -24,7 +24,12 @@ class ValoracionesModel extends ModeloBase{
         $query=$this->ejecutarSql("SELECT * FROM $this->table WHERE product=$pro AND usuario=$usu");
         return $query;
     }
-    
+    //Método que marca una valoración como no reportada tras su revisión
+    public function revisarValoracion($id){
+        $idval=$id;
+        $query=$this->ejecutarBorrarSql("UPDATE $this->table SET reportado=0 WHERE idval=$idval");
+        return $query;
+    }
     // Método que marca una valoración como reportada.
     public function reportarValoracion($id) {
         $idval=$id;

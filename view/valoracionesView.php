@@ -1,5 +1,5 @@
-<?php require 'inc/encabezado.inc'; ?>
 <?php require 'config/sesion.php'; ?>
+<?php require 'inc/encabezado.inc'; ?>
 <?php if (($sesionabierta) && ($_SESSION["IdPerfil"]==4)) { ?>
          <div class="container text-light">
           <div class="row">
@@ -24,7 +24,29 @@
                 <tr><td><?php echo $val->idval; ?></td>
                 <td><?php echo $val->product; ?></td>
                 <td><?php echo $val->usuario; ?></td>
-                <td><?php echo $val->reportado; ?></td>
+                <td><?php echo $val->reportado; ?> 
+                   <?php if ($val->reportado==1) { ?>
+                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#resolverReporte">
+                    Visto
+                    </button>
+                     <div class="modal text-secondary" id="resolverReporte">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Reporte visto y solucionado</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            Si la valoración ha sido ya revisada pulse Continuar, de lo contrario Cancele.
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <a href="<?php echo $helper->url("valoraciones","revisar"); ?>&id=<?php echo $val->idval; ?>" class="btn btn-warning">Continuar</a>
+                                <?php } ?>
+                          </div>
+                        </div>
+                      </div>
+                    </div></td>
                 <?php if ($val->reportado==1) {
                 $control=true;
                 } ?>
