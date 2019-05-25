@@ -36,7 +36,26 @@
                 <td><?php echo $usuario->password; ?></td>
                 <td><?php echo $usuario->apodo; ?></td>
                 <td><?php echo $usuario->eliminado; ?></td>
-                <td><a href="<?php echo $helper->url("usuario","borrar"); ?>&id=<?php echo $usuario->idusuario; ?>" class="btn btn-danger">Borrar</a></td>
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarUsuario">
+                    Borrar
+                    </button>
+                     <div class="modal text-danger" id="borrarUsuario">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Borrar Usuario</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            Esta acción borrará al usuario definitivamente (si no tiene ninguna valoración). ¿Está seguro?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <a href="<?php echo $helper->url("usuario","borrar"); ?>&id=<?php echo $usuario->idusuario; ?>" class="btn btn-danger">Borrar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div></td>
                 <td><a href="<?php echo $helper->url("usuario","modificar"); ?>&id=<?php echo $usuario->idusuario; ?>" class="btn btn-success">Modificar</a></td>
                 </tr>
             <?php } ?>

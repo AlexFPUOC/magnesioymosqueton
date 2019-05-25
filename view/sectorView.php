@@ -22,7 +22,26 @@
                 <tr><td><?php echo $categoria->idsector; ?></td>
                 <td><?php echo $categoria->sector; ?></td>
                 <td><?php echo $categoria->idesc; ?></td>
-                <td><a href="<?php echo $helper->url("categoria","borrar"); ?>&id=<?php echo $categoria->idsector; ?>" class="btn btn-danger">Borrar</a></td>
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarSector">
+                    Borrar
+                    </button>
+                     <div class="modal text-danger" id="borrarSector">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Borrar sector</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            Esta acción borrará el sector definitivamente. ¿Está seguro?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <a href="<?php echo $helper->url("categoria","borrar"); ?>&id=<?php echo $categoria->idsector; ?>" class="btn btn-danger">Borrar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div></td>
                 <td><a href="<?php echo $helper->url("categoria","modificar"); ?>&id=<?php echo $categoria->idsector; ?>" class="btn btn-success">Modificar</a></td>
                 </tr>
             <?php } ?>

@@ -20,7 +20,26 @@
             <?php foreach($allroca as $roca) {?>
                 <tr><td><?php echo $roca->idro; ?></td>
                 <td><?php echo $roca->tiporoca; ?></td>
-                <td><a href="<?php echo $helper->url("roca","borrar"); ?>&id=<?php echo $roca->idro; ?>" class="btn btn-danger">Borrar</a></td>
+                <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#borrarRoca">
+                    Borrar
+                    </button>
+                     <div class="modal text-danger" id="borrarRoca">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Borrar Tipo de roca</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            Esta acción borrará este tipo de roca definitivamente. ¿Está seguro?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <a href="<?php echo $helper->url("roca","borrar"); ?>&id=<?php echo $roca->idro; ?>" class="btn btn-danger">Borrar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div></td>
                 <td><a href="<?php echo $helper->url("roca","modificar"); ?>&id=<?php echo $roca->idro; ?>" class="btn btn-success">Modificar</a></td>
                 </tr>
             <?php } ?>
